@@ -39,7 +39,7 @@ This model uses a basic linear regression under the hood.
 """)
 
 # Input
-input1 = st.number_input("📈 Feature Value", min_value=0.0, step=0.1)
+input1 = st.number_input("📈 Experience", min_value=0.0, step=0.1)
 
 # Predict button
 if st.button("🔍 Predict Salary"):
