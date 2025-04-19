@@ -1,4 +1,5 @@
 streamlit
-numpy
 opencv-python
-Pillow
+numpy
+pillow
+matplotlib
