@@ -13,7 +13,7 @@ with open(model_path, 'rb') as file:
 
 # Your Streamlit code here
 st.title("My ML Model")
-input1 = st.number_input("Feature 1")
+input1 = st.number_input("Enter Your Experience")
 
 input_data = [[input1]]
 prediction = model.predict(input_data)
