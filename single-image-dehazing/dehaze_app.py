@@ -5,6 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 # Dark Channel Prior functions (reuse your functions here)
+
 def get_dark_channel(image, window_size):
     min_channel = np.min(image, axis=2)
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (window_size, window_size))
@@ -57,13 +58,10 @@ if uploaded_file is not None:
     dehazed = recover_scene_radiance(resized, A, transmission)
 
     st.subheader("Dehazed Image")
-    st.image(dehazed, channels="RGB", use_column_width=True)
-
-    # Convert the image to a byte stream for download
     dehazed_image = Image.fromarray(dehazed)
-    buffered = BytesIO()
-    dehazed_image.save(buffered, format="PNG")
-    buffered.seek(0)
+    st.image(dehazed_image, use_column_width=True)
 
     # Option to download
-    st.download_button("Download Dehazed Image", data=buffered, file_name="dehazed_image.png", mime="image/png")
+    buffered = BytesIO()
+    dehazed_image.save(buffered, format="PNG")
+    st.download_button("Download Dehazed Image", data=buffered.getvalue(), file_name="dehazed_image.png")
