@@ -45,7 +45,8 @@ if uploaded_file is not None:
     img_np = np.array(image)
 
     st.subheader("Original Image")
-    st.image(image, use_column_width=True)
+    st.image(image, use_container_width=True)
+
 
     # Resize image for faster processing (optional)
     resized = cv2.resize(img_np, (512, 512))
@@ -60,5 +61,20 @@ if uploaded_file is not None:
     st.image(dehazed, channels="RGB", use_column_width=True)
 
     # Option to download
+    from io import BytesIO
+
+    # Option to download
     dehazed_image = Image.fromarray(dehazed)
-    st.download_button("Download Dehazed Image", data=dehazed_image.tobytes(), file_name="dehazed_image.png")
+
+    # Convert the image to PNG format in memory
+    buffer = BytesIO()
+    dehazed_image.save(buffer, format="PNG")
+    buffer.seek(0)
+
+    # Show the dehazed image properly
+    st.subheader("Dehazed Image")
+    st.image(dehazed_image, use_container_width=True)
+
+    # Download button with proper PNG encoding
+    st.download_button("Download Dehazed Image", data=buffer, file_name="dehazed_image.png", mime="image/png")
+
