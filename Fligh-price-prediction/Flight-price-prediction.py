@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1cJ5krUmldixm61fFAX5pO6iCSq_5LP8D
 """
 
-
 # app.py
 import streamlit as st
 import pandas as pd
@@ -34,10 +33,13 @@ def con_to_mins(duration):
 
 
 
-# Load dataset
+
+@st.cache_data
+# Load dataset from GitHub URL with engine specification
 @st.cache_data
 def load_data():
-    df = pd.read_excel("Flight-price-predication.xlsx")
+    url = "https://github.com/Bhavya-Mistry/ML/raw/refs/heads/main/Flight-price-prediction/Flight-price-predication.xlsx"
+    df = pd.read_excel(url, engine='openpyxl')  # Explicitly set the engine to 'openpyxl'
     df['Date_of_Journey'] = pd.to_datetime(df['Date_of_Journey'], format='%d/%m/%Y')
     df['Day'] = df['Date_of_Journey'].dt.day_name()
     df['weekdayornot'] = df['Day'].apply(lambda x: "Weekend" if x in ["Sunday", "Saturday"] else "Weekday")
@@ -46,6 +48,8 @@ def load_data():
     df['Duration'] = df['Duration'].apply(con_to_mins)
     df = pd.get_dummies(df, columns=['Airline', 'Source', 'Destination', 'Total_Stops', 'Additional_Info', 'weekdayornot'], drop_first=True)
     return df
+
+
 
 df = load_data()
 
