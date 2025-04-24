@@ -13,11 +13,15 @@ import pickle
 import numpy as np
 
 # Load the saved scaler and KMeans model
-with open("scaler.pkl", "rb") as f:
+scaler_path = os.path.join(os.path.dirname(__file__), 'scaler.pkl')
+model_path = os.path.join(os.path.dirname(__file__), 'kmeans_model.pkl')
+
+with open(scaler_path, 'rb') as f:
     scaler = pickle.load(f)
 
-with open("kmeans_model.pkl", "rb") as f:
+with open(model_path, 'rb') as f:
     kmeans = pickle.load(f)
+
 
 # Custom cluster labels (adjust if needed)
 cluster_labels = {
