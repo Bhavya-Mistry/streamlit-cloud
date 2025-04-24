@@ -29,5 +29,5 @@ These segments are based on the customers' **RFM (Recency, Frequency, and Moneta
 ## Output Screenshots
 
 
-![Image 1](customer-segmentation/Output-Images/img1.png)
+![Image 1](Output-Images/img1.png)
 ![Image 2](Output-Images/img2.png)
