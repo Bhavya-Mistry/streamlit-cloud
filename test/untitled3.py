@@ -11,6 +11,7 @@ Original file is located at
 import streamlit as st
 import pickle
 import numpy as np
+import os
 
 # Load the saved scaler and KMeans model
 scaler_path = os.path.join(os.path.dirname(__file__), 'scaler.pkl')
